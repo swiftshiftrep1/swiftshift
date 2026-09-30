@@ -1,0 +1,31 @@
+services:
+  - type: web
+    name: swiftshift
+    runtime: node
+    plan: free
+    buildCommand: npm install
+    startCommand: npm start
+    healthCheckPath: /
+    envVars:
+      - key: NODE_VERSION
+        value: 22
+      - key: NODE_ENV
+        value: production
+      - key: TRUST_PROXY
+        value: "true"
+      # Demo mode auto-approves verification and marks jobs as paid.
+      # Set to "false" before real users or real payments.
+      - key: DEMO_MODE
+        value: "true"
+      - key: PAYMENTS_ENABLED
+        value: "false"
+      # Render generates a random secret for you
+      - key: DOCUMENT_ENCRYPTION_KEY
+        generateValue: true
+      # You fill these in on the Render dashboard
+      - key: BOOTSTRAP_ADMIN_EMAIL
+        sync: false
+      - key: BOOTSTRAP_ADMIN_PASSWORD
+        sync: false
+      - key: PUBLIC_BASE_URL
+        sync: false

@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>SwiftShift — Student Task Marketplace</title><link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+<header class="topbar">
+  <button class="brand" data-page="home"><span class="brand-mark">S</span> SwiftShift</button>
+  <nav><button data-page="home">Home</button><button data-page="jobs">Find Jobs</button><button data-page="myjobs">My Jobs</button><button data-page="runner" class="runner-pill">🏃 Runner Mode</button></nav>
+  <div id="accountArea" class="account-area"></div>
+</header>
+<main>
+<section id="home" class="page active"><div class="hero"><div><p class="eyebrow">STUDENT TASK MARKETPLACE</p><h1>What do you need<br><span>done?</span></h1><p class="hero-copy">Post a task. A verified student accepts it. SwiftShift handles pricing, status, communication and the job record.</p><div class="hero-actions"><button class="primary" data-page="post">+ Post a Job</button><button class="secondary" data-page="runner">Earn as a Runner →</button></div></div><div class="hero-card"><div class="mini-label">LIVE EXAMPLE</div><h3>Print & deliver assignment</h3><div class="route"><span>📍 UP Library</span><span>→</span><span>📍 Hatfield</span></div><div class="hero-card-bottom"><strong>R38</strong><span>Verified runner ✓</span></div></div></div>
+<div class="section-heading"><div><p class="eyebrow">HOW IT WORKS</p><h2>One marketplace. Two sides.</h2></div></div><div class="feature-grid"><article><div class="icon">📝</div><h3>1. Post a Job</h3><p>Describe what you need, where and when. SwiftShift calculates a transparent price.</p></article><article><div class="icon">⚡</div><h3>2. Get It Done</h3><p>A verified runner accepts the job and moves through the tracked job stages.</p></article><article><div class="icon">💬</div><h3>3. Stay Connected</h3><p>Chat inside the job, receive notifications, and review each other after completion.</p></article></div></section>
+
+<section id="post" class="page"><div class="page-head"><div><p class="eyebrow">REQUESTER</p><h2>Post a Job</h2><p>Price updates as you change the job details.</p></div></div><div class="two-col"><form id="jobForm" class="card form-card">
+<label>Job title *<input maxlength="80" name="title" required placeholder="e.g. Print & deliver assignment"></label>
+<label>Category *<select name="category" required><option value="">Choose</option><option>Printing</option><option>Pickup & Delivery</option><option>Food</option><option>Shopping</option><option>Admin</option><option>Academic</option><option>Documents</option><option>Other</option></select></label>
+<label>What needs to be done? *<textarea maxlength="500" name="description" rows="4" required placeholder="Give the runner enough information..."></textarea></label>
+<div class="form-row"><label>Pickup / starting point *<input maxlength="120" name="pickup" required placeholder="UP Library"></label><label>Destination<input maxlength="120" name="destination" placeholder="Hatfield Residence"></label></div>
+<div class="form-row"><label>When? *<select name="urgency"><option>ASAP</option><option>Today</option><option>Schedule</option></select></label><label>Material costs<input name="materialCost" type="number" min="0" max="5000" step="1" value="0"></label></div>
+<label id="scheduleWrap" hidden>Date &amp; time *<input name="scheduledFor" type="datetime-local"></label>
+<button class="primary full" type="submit">Post Job →</button><p class="muted">In demo mode the job is marked paid. In normal mode the job remains pending until the payment provider confirms payment.</p></form>
+<aside class="card price-preview"><p class="eyebrow">ESTIMATED PRICE</p><div class="price">R<span id="previewTotal">—</span></div><p class="muted">Transparent price breakdown</p><div id="breakdown" class="breakdown"></div></aside></div></section>
+
+<section id="jobs" class="page"><div class="page-head"><div><p class="eyebrow">RUNNER MODE</p><h2>Available Jobs</h2><p>Only paid, open jobs appear here.</p></div><button id="refreshJobs" class="secondary">↻ Refresh</button></div><div id="jobList" class="job-grid"></div></section>
+
+<section id="runner" class="page"><div class="runner-banner"><div><p class="eyebrow">RUNNER MODE</p><h2>Turn spare time into earnings.</h2><p>Location sharing is available only during an active accepted job.</p></div><div class="toggle-wrap"><span>Available</span><button id="availabilityToggle" class="toggle on" aria-label="Toggle runner availability"><span></span></button></div></div>
+<div class="stats-grid"><div class="stat card"><span>Earned</span><strong id="statEarned">R0</strong><small id="statPending">R0 pending</small></div><div class="stat card"><span>Completed jobs</span><strong id="statDone">0</strong><small><span id="statActive">0</span> active</small></div><div class="stat card"><span>Open jobs</span><strong id="statOpen">0</strong><small>Available now</small></div></div>
+<div class="section-heading"><div><p class="eyebrow">IN PROGRESS</p><h3>Your active jobs</h3></div></div><div id="runnerActive" class="job-grid"></div><div class="section-heading"><div><p class="eyebrow">AVAILABLE</p><h3>Jobs you can complete</h3></div></div><div id="runnerJobs" class="job-grid"></div><div class="section-heading"><div><p class="eyebrow">PAYOUTS</p><h3>Your payout history</h3></div></div><div id="payoutList" class="job-grid"></div></section>
+
+<section id="myjobs" class="page"><div class="page-head"><div><p class="eyebrow">REQUESTER</p><h2>My Jobs</h2><p>Track, chat, dispute and review from each job.</p></div></div><div id="myJobList" class="job-grid"></div></section>
+
+<section id="admin" class="page"><div class="page-head"><div><p class="eyebrow">ADMIN</p><h2>Operations Hub</h2><p>Verification, safety, disputes, users, jobs and platform metrics.</p></div><button id="refreshAdmin" class="secondary">↻ Refresh</button></div><div id="adminOverview"></div></section>
+
+<section id="verify" class="page"><div class="page-head"><div><p class="eyebrow">ACCOUNT</p><h2>Verify or log in</h2><p>Verified accounts are required to post, accept, chat and review jobs.</p></div></div><div class="two-col"><div class="card form-card"><form id="verifyForm"><label>Full name *<input maxlength="80" name="name" required autocomplete="name"></label><label>Email *<input maxlength="120" name="email" type="email" required autocomplete="email"></label><label>Password *<input minlength="10" maxlength="120" name="password" type="password" required autocomplete="new-password"></label><label>Student card number *<input maxlength="40" name="studentCard" required></label><label>Photographic ID *<input name="idDocument" type="file" accept="image/*,.pdf" required></label><label class="check"><input type="checkbox" name="termsAccepted" required> I accept the Terms and Conditions.</label><button class="primary full" type="submit">Create account →</button><p id="verifyMsg" class="muted" role="status"></p></form><hr><form id="loginForm"><h3>Already registered?</h3><label>Email<input name="email" type="email" required autocomplete="email"></label><label>Password<input name="password" type="password" required autocomplete="current-password"></label><button class="secondary full" type="submit">Log in</button><p id="loginMsg" class="muted" role="status"></p></form></div><aside class="card price-preview"><p class="eyebrow">VERIFICATION</p><p class="muted">Identity documents are encrypted at rest in this build. Production still requires an approved verification process, secure object storage, retention/deletion rules and POPIA review.</p></aside></div></section>
+</main>
+<div id="toast" class="toast"></div>
+<div id="modal" class="modal" hidden><div class="modal-box"><button id="modalClose" class="modal-close">×</button><div id="modalContent"></div></div></div>
+<script src="/app.js"></script>
+</body></html>
